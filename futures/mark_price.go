@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 
-	"  github.com/shaolinjehzu/go-binance/common"
+	"github.com/shaolinjehzu/go-binance/common"
 )
 
 // PremiumIndexService get premium index
