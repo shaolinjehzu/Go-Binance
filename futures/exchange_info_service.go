@@ -49,15 +49,15 @@ type RateLimit struct {
 
 // Symbol market symbol
 type Symbol struct {
-	Symbol                string                   `json:"symbol"`
-	Status                string                   `json:"status"`
-	MaintMarginPercent    string                   `json:"maintMarginPercent"`
-	PricePrecision        int                      `json:"pricePrecision"`
-	QuantityPrecision     int                      `json:"quantityPrecision"`
-	RequiredMarginPercent string                   `json:"requiredMarginPercent"`
-	OrderType             []OrderType              `json:"OrderType"`
-	TimeInForce           []TimeInForceType        `json:"timeInForce"`
-	Filters               []map[string]interface{} `json:"filters"`
+	Symbol                 string                   `json:"symbol"`
+	Status                 string                   `json:"status"`
+	BaseAsset              string                   `json:"baseAsset"`
+	BaseAssetPrecision     int                      `json:"baseAssetPrecision"`
+	QuoteAsset             string                   `json:"quoteAsset"`
+	QuotePrecision         int                      `json:"quotePrecision"`
+	OrderType              []string                 `json:"orderTypes"`
+	Filters                []map[string]interface{} `json:"filters"`
+	TimeInForce			   []string 				`json:"timeInForce"`
 }
 
 // LotSizeFilter define lot size filter of symbol
