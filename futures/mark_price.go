@@ -43,6 +43,7 @@ func (s *PremiumIndexService) Do(ctx context.Context, opts ...RequestOption) (re
 type PremiumIndex struct {
 	Symbol          string `json:"symbol"`
 	MarkPrice       string `json:"markPrice"`
+	IndexPrice		string `json:"indexPrice"`
 	LastFundingRate string `json:"lastFundingRate"`
 	NextFundingTime int64  `json:"nextFundingTime"`
 	Time            int64  `json:"time"`
