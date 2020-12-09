@@ -49,12 +49,18 @@ type RateLimit struct {
 // Symbol market symbol
 type Symbol struct {
 	Symbol                 string                   `json:"symbol"`
+	Pair 				   string					`json:"pair"`
+	ContractType 		   string					`json:"contractType"`
+	DeliveryDate 		   int64					`json:"deliveryDate"`
+	OnBoardDate 		   string					`json:"onboardDate"`
 	Status                 string                   `json:"status"`
 	BaseAsset              string                   `json:"baseAsset"`
 	BaseAssetPrecision     int                      `json:"baseAssetPrecision"`
 	QuoteAsset             string                   `json:"quoteAsset"`
 	QuotePrecision         int                      `json:"quotePrecision"`
-	OrderTypes             []string                 `json:"orderTypes"`
+	PricePrecision		   int						`json:"pricePrecision"`
+	QuantityPrecision	   int						`json:"quantityPrecision"`
+	OrderTypes             []string                 `json:"OrderType"`
 	IcebergAllowed         bool                     `json:"icebergAllowed"`
 	OcoAllowed             bool                     `json:"ocoAllowed"`
 	IsSpotTradingAllowed   bool                     `json:"isSpotTradingAllowed"`
