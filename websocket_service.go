@@ -10,6 +10,7 @@ import (
 var (
 	baseURL         = "wss://stream.binance.com:9443/ws"
 	baseFutureURL   = "wss://fstream.binance.com/ws"
+	baseFutureCoinURL   = "wss://dstream.binance.com/ws"
 	combinedBaseURL = "wss://stream.binance.com:9443/stream?streams="
 	// WebsocketTimeout is an interval for sending ping/pong messages if WebsocketKeepalive is enabled
 	WebsocketTimeout = time.Second * 60
@@ -381,6 +382,22 @@ type WsTradeHandler func(event *WsTradeEvent)
 // WsTradeFutureServe serve websocket handler
 func WsTradeFutureServe(symbol string, handler WsTradeHandler, errHandler ErrHandler) (doneC, stopC chan struct{}, err error) {
 	endpoint := fmt.Sprintf("%s/%s@trade", baseFutureURL, strings.ToLower(symbol))
+	cfg := newWsConfig(endpoint)
+	wsHandler := func(message []byte) {
+		event := new(WsTradeEvent)
+		err := json.Unmarshal(message, event)
+		if err != nil {
+			errHandler(err)
+			return
+		}
+		handler(event)
+	}
+	return wsServe(cfg, wsHandler, errHandler)
+}
+
+// WsTradeFutureServe serve websocket handler
+func WsTradeFutureCoinServe(symbol string, handler WsTradeHandler, errHandler ErrHandler) (doneC, stopC chan struct{}, err error) {
+	endpoint := fmt.Sprintf("%s/%s@trade", baseFutureCoinURL, strings.ToLower(symbol))
 	cfg := newWsConfig(endpoint)
 	wsHandler := func(message []byte) {
 		event := new(WsTradeEvent)
