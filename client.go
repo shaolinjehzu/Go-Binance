@@ -7,6 +7,7 @@ import (
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
+	"github.com/shaolinjehzu/go-binance/coin"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -169,6 +170,11 @@ func NewClient(apiKey, secretKey string) *Client {
 // NewFuturesClient initialize client for futures API
 func NewFuturesClient(apiKey, secretKey string) *futures.Client {
 	return futures.NewClient(apiKey, secretKey)
+}
+
+// NewFuturesCoinClient initialize client for futures coin API
+func NewFuturesCoinClient(apiKey, secretKey string) *coin.Client {
+	return coin.NewClient(apiKey, secretKey)
 }
 
 type doFunc func(req *http.Request) (*http.Response, error)
