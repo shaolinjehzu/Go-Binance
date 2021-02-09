@@ -174,7 +174,7 @@ func NewFuturesClient(apiKey, secretKey string) *futures.Client {
 
 // NewFuturesCoinClient initialize client for futures coin API
 func NewFuturesCoinClient(apiKey, secretKey string) *coin.Client {
-	return coin.NewClient(apiKey, secretKey)
+	return coin.NewClient(apiKey, secretKey) 
 }
 
 type doFunc func(req *http.Request) (*http.Response, error)

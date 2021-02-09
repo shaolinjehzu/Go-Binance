@@ -478,6 +478,38 @@ func WsMarketStatServe(symbol string, handler WsMarketStatHandler, errHandler Er
 	return wsServe(cfg, wsHandler, errHandler)
 }
 
+// WsMarketStatServe serve websocket that push 24hr statistics for single market every second
+func WsFuturesMarketStatServe(symbol string, handler WsMarketStatHandler, errHandler ErrHandler) (doneC, stopC chan struct{}, err error) {
+	endpoint := fmt.Sprintf("%s/%s@ticker", baseFutureURL, strings.ToLower(symbol))
+	cfg := newWsConfig(endpoint)
+	wsHandler := func(message []byte) {
+		var event WsMarketStatEvent
+		err := json.Unmarshal(message, &event)
+		if err != nil {
+			errHandler(err)
+			return
+		}
+		handler(&event)
+	}
+	return wsServe(cfg, wsHandler, errHandler)
+}
+
+// WsMarketStatServe serve websocket that push 24hr statistics for single market every second
+func WsFuturesCoinMarketStatServe(symbol string, handler WsMarketStatHandler, errHandler ErrHandler) (doneC, stopC chan struct{}, err error) {
+	endpoint := fmt.Sprintf("%s/%s@ticker", baseFutureCoinURL, strings.ToLower(symbol))
+	cfg := newWsConfig(endpoint)
+	wsHandler := func(message []byte) {
+		var event WsMarketStatEvent
+		err := json.Unmarshal(message, &event)
+		if err != nil {
+			errHandler(err)
+			return
+		}
+		handler(&event)
+	}
+	return wsServe(cfg, wsHandler, errHandler)
+}
+
 // WsAllMarketsStatHandler handle websocket that push all markets statistics for 24hr
 type WsAllMarketsStatHandler func(event WsAllMarketsStatEvent)
 
